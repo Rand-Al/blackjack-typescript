@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./Components/Login";
+import Profile from "./Components/Profile";
+import { User } from "./types/user.types";
+import { isUserLoggedIn } from "./utils/userUtils";
 
 function App() {
+  const handleLogout = () => {
+    const users: User[] = JSON.parse(localStorage.getItem("users") ?? "[]");
+    if (!users.length) {
+      return;
+    }
+    const user = users.find((u) => u.isLoggedIn);
+    if (!user) {
+      return;
+    }
+    user.isLoggedIn = false;
+    localStorage.setItem("users", JSON.stringify(users));
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isUserLoggedIn() ? null : <Login />}
+      <Profile />
+      {isUserLoggedIn() ? <button onClick={handleLogout}>Logout</button> : null}
     </div>
   );
 }
