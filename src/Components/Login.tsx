@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import { User } from "../types/user.types";
 import { getUsers, setUsers } from "../utils/localStorageUtils";
+import {
+  Outlet,
+  Link,
+  useLoaderData,
+  Form,
+  redirect,
+  useNavigate,
+} from "react-router-dom";
 
 const Login = () => {
+  const shouldRedirect = true;
+
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const handleLogin = () => {
     const users = getUsers();
@@ -21,6 +32,7 @@ const Login = () => {
       users.push(user);
     }
     setUsers(users);
+    navigate("/profile");
   };
   return (
     <div>
@@ -30,6 +42,7 @@ const Login = () => {
         onChange={(e) => setUsername(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
+      <Link to="/profile">Profile</Link>
     </div>
   );
 };
