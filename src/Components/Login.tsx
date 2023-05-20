@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { User } from "../types/user.types";
 import { getUsers, setUsers } from "../utils/localStorageUtils";
-import {
-  Outlet,
-  Link,
-  useLoaderData,
-  Form,
-  redirect,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import s from "../css/Login.module.css";
 
 const Login = () => {
-  const shouldRedirect = true;
-
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const handleLogin = () => {
@@ -35,15 +27,23 @@ const Login = () => {
     navigate("/profile");
   };
   return (
-    <div>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-      <Link to="/profile">Profile</Link>
-    </div>
+    <>
+      <h2 className=" relative text-white text-4xl text-center mt-9">
+        Enter your username to play the game
+      </h2>
+      <div className={s.login}>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className={s.name}
+          placeholder="Enter your username"
+        />
+        <button className={s.submit} onClick={handleLogin}>
+          Login
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,23 @@
+.app {
+  background: url("/public/assets/images/table.png") 0 0 / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+.main {
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+}
+.main::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(48, 48, 48, 0.63);
+  z-index: 0;
+}
