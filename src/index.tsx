@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
 import Profile from "./Components/Profile";
+import Rules from "./Components/Rules";
+import Login from "./Components/Login";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/rules",
+        element: <Rules />,
       },
     ],
   },

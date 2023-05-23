@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { User } from "../types/user.types";
 import { getUsers, setUsers } from "../utils/localStorageUtils";
 import { useNavigate } from "react-router-dom";
-import s from "../css/Login.module.css";
+import s from "../assets/css/Login.module.css";
+import { useGlobalContext } from "../MyGlobalContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const { setIsLoggedIn } = useGlobalContext();
   const handleLogin = () => {
     const users = getUsers();
     if (users.length && users.some((u) => u.username === username)) {
@@ -24,6 +26,7 @@ const Login = () => {
       users.push(user);
     }
     setUsers(users);
+    setIsLoggedIn(true);
     navigate("/profile");
   };
   return (

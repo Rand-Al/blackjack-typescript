@@ -1,37 +1,32 @@
-import { useState } from "react";
 import "./App.css";
 import Login from "./Components/Login";
 import Profile from "./Components/Profile";
-import { User } from "./types/user.types";
 import { isUserLoggedIn } from "./utils/userUtils";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import Aside from "./Components/Aside";
+import { useState } from "react";
+import { MyGlobalContext } from "./MyGlobalContext";
+import Rules from "./Components/Rules";
 
 function App() {
-  const handleLogout = () => {
-    const users: User[] = JSON.parse(localStorage.getItem("users") ?? "[]");
-    if (!users.length) {
-      return;
-    }
-    const user = users.find((u) => u.isLoggedIn);
-    if (!user) {
-      return;
-    }
-    user.isLoggedIn = false;
-    localStorage.setItem("users", JSON.stringify(users));
-  };
+  const [isAside, setIsAside] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isUserLoggedIn());
   return (
-    <div className="app">
-      <Header />
-      <div className="main">
-        {isUserLoggedIn() ? null : <Login />}
-        <Profile />
-        {isUserLoggedIn() ? (
-          <button className="btn__logout" onClick={handleLogout}>Logout</button>
-        ) : null}
+    <MyGlobalContext.Provider
+      value={{ isAside, setIsAside, isLoggedIn, setIsLoggedIn }}
+    >
+      <div className="app">
+        <Header />
+        <div className="main">
+          <Aside isAside={isAside} setIsAside={setIsAside} />
+          {/* ?? props typeScript */}
+          {isLoggedIn ? <Profile /> : <Login />}
+          <Rules />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </MyGlobalContext.Provider>
   );
 }
 

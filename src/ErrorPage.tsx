@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
-const ErrorPage: React.FC = () => {
+const ErrorPage = () => {
   // you don't need to explicitly set error to `unknown`
   const error = useRouteError();
   let errorMessage: string;

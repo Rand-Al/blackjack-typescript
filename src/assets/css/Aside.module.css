@@ -1,0 +1,81 @@
+.aside {
+  padding-left: 20px;
+  padding-top: 5px;
+
+  width: 252px;
+  top: 0px;
+  left: -13.7%;
+  background-color: rgba(255, 255, 255, 0.555);
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+}
+.aside.open {
+  left: 0;
+}
+
+.arrowRight {
+  position: absolute;
+  top: 6%;
+  right: 5px;
+  cursor: pointer;
+  background: url("../images/arrow-right.png") 0 0 / cover no-repeat;
+  width: 25px;
+  height: 25px;
+}
+.arrowLeft {
+  position: absolute;
+  top: 6%;
+  right: 5px;
+  cursor: pointer;
+  background: url("../images/arrow-left.png") 0 0 / cover no-repeat;
+  width: 25px;
+  height: 25px;
+}
+.arrowRight:hover {
+  animation: arrow-left 1s linear infinite;
+}
+.arrowLeft:hover {
+  animation: arrow-left 1s linear infinite;
+}
+
+.list {
+  position: relative;
+  padding-right: 50px;
+  padding-top: 20px;
+}
+
+@keyframes arrow-right {
+  0% {
+    transform: translate(-5px);
+  }
+  25% {
+    transform: translate(-2px);
+  }
+  50% {
+    transform: translate(0px);
+  }
+  75% {
+    transform: translate(2px);
+  }
+  100% {
+    transform: translate(5px);
+  }
+}
+@keyframes arrow-left {
+  0% {
+    transform: translate(5px);
+  }
+  25% {
+    transform: translate(2px);
+  }
+  50% {
+    transform: translate(0px);
+  }
+  75% {
+    transform: translate(-2px);
+  }
+  100% {
+    transform: translate(-5px);
+  }
+}

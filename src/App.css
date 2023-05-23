@@ -1,11 +1,12 @@
 .app {
-  background: url("/public/assets/images/table.png") 0 0 / cover no-repeat;
+  background: url("/src/assets/images/bg.png") 0 0 / cover no-repeat;
   display: flex;
   flex-direction: column;
   height: 100vh;
   position: relative;
   z-index: 1;
 }
+
 .main {
   flex: 1 1 auto;
   position: relative;
