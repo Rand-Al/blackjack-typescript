@@ -1,20 +1,14 @@
 import { Link } from "react-router-dom";
 import s from "../assets/css/Aside.module.css";
 import { useGlobalContext } from "../MyGlobalContext";
-interface AsideProps {
-  isAside: boolean;
-  setIsAside: (value: boolean) => void;
-}
-const Aside = (props: AsideProps) => {
+const Aside = () => {
   const { isAside, setIsAside } = useGlobalContext();
   return (
-    <aside
-      className={`${s.aside} ${props.isAside ? s.open : ""} transition-all`}
-    >
+    <aside className={`${s.aside} ${isAside ? s.open : ""} transition-all`}>
       <ul className={`${s.list} flex gap-2 flex-col items-start`}>
         <li className="">
-          <Link to="/profile" className="hover:underline">
-            Profile
+          <Link to="/rules" className="hover:underline">
+            Rules
           </Link>
         </li>
         <li className="">
@@ -24,7 +18,7 @@ const Aside = (props: AsideProps) => {
         </li>
         <li
           className={`${isAside ? s.arrowLeft : s.arrowRight}`}
-          onClick={() => setIsAside(!props.isAside)}
+          onClick={() => setIsAside(!isAside)}
         ></li>
       </ul>
     </aside>

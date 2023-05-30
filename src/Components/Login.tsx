@@ -1,33 +1,23 @@
-import React, { useState } from "react";
-import { User } from "../types/user.types";
-import { getUsers, setUsers } from "../utils/localStorageUtils";
-import { useNavigate } from "react-router-dom";
-import s from "../assets/css/Login.module.css";
-import { useGlobalContext } from "../MyGlobalContext";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import s from '../assets/css/Login.module.css';
+import { useGlobalContext } from '../MyGlobalContext';
+import { loginUser } from '../utils/userUtils';
 
 const Login = () => {
+  const { isLoggedIn, setIsLoggedIn } = useGlobalContext();
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const { setIsLoggedIn } = useGlobalContext();
-  const handleLogin = () => {
-    const users = getUsers();
-    if (users.length && users.some((u) => u.username === username)) {
-      const existingUser = users.find((u) => u.username === username) as User;
-      existingUser.isLoggedIn = true;
-    } else {
-      const user: User = {
-        username,
-        amount: 10000,
-        totalGames: 0,
-        winGames: 0,
-        loseGames: 0,
-        isLoggedIn: true,
-      };
-      users.push(user);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
     }
-    setUsers(users);
+  }, [navigate, isLoggedIn]);
+
+  const [username, setUsername] = useState('');
+  const handleLogin = () => {
+    loginUser(username);
     setIsLoggedIn(true);
-    navigate("/profile");
   };
   return (
     <>

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 export type GlobalContent = {
   isAside: boolean;
   setIsAside: (value: boolean) => void;

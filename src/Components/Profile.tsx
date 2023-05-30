@@ -1,11 +1,20 @@
-import React from "react";
-import { User } from "../types/user.types";
-import { getUsers } from "../utils/localStorageUtils";
-import s from "../assets/css/Profile.module.css";
+import s from '../assets/css/Profile.module.css';
+import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../MyGlobalContext';
+import { getUsers } from '../utils/userUtils';
+import { useEffect } from 'react';
 
 const Profile = () => {
-  const users: User[] = getUsers();
-  const user = users.find((u) => u.isLoggedIn);
+  const { isLoggedIn } = useGlobalContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  }, [navigate, isLoggedIn]);
+
+  const user = getUsers().find((u) => u.isLoggedIn);
 
   return (
     <div className={s.profile}>

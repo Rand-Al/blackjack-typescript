@@ -9,3 +9,7 @@ body {
   position: relative;
   z-index: 2;
 }
+.relative {
+  position: relative;
+  z-index: 2;
+}
